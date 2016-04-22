@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  min-height: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: Georgia, serif;
+  background: 0 0 no-repeat linear-gradient(to bottom, hsl(70, 75%, 45%), hsl(70, 70%, 35%));
+}
+
+.NotesList {
+  padding: 2rem;
+}
+
+.NotesList-header {
+  color: hsl(75, 45%, 45%);
+  font: 700 6rem/1 Gerogia, serif;
+  text-align: center;
+  text-shadow: 0 -1px 0 hsla(75, 30%, 30%, 1),
+  0 1px 0 hsla(75, 60%, 60%, 1);
+}
+
+.NotesList-button {
+  height: 2em;
+  width: 2em;
+  line-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background-color: white;
+  color: hsla(70, 45%, 45%, 1);
+  cursor: default;
+}
+
+.NotesList-list {
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+
+  & .NotesList-listItem {
+    display: block;
+    position: relative;
+
+    & > span,
+    & > input {
+      display: block;
+      margin: 0.2rem;
+      padding: 0.3rem;
+      width: 100%;
+      font-family: Georgia, serif;
+      font-size: 1.6rem;
+      color: hsl(60, 45%, 15%);
+      border: 1px solid transparent;
+      border-left: 3px solid White;
+      border-bottom: 1px dotted White;
+      border-radius: 0.3rem;
+      outline: none;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        cursor: text;
+        border-color: White;
+        background-color: hsla(0, 0%, 100%, 0.45);
+
+        & + .NotesList-button {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+
+      &:focus {
+        border-style: solid;
+        background-color: hsla(0, 0%, 100%, 0.75);
+      }
+    }
+
+    & > .NotesList-button {
+      position: absolute;
+      top: calc(50% - 0.5em);
+      right: 0.5em;
+      width: 1em;
+      height: 1em;
+      margin: -1px -1px 0 0;
+      border-radius: 1em;
+      background-color: transparent;
+      color: hsla(70, 45%, 30%, 1);
+      transition: all 0.3s ease-in-out;
+
+      &:hover,
+      &:focus {
+        background-color: White;
+        color: hsl(70, 45%, 45%);
+        outline: none;
+      }
+    }
+  }
+}
