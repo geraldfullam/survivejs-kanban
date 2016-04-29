@@ -10,22 +10,23 @@ html {
 body {
   font-size: 1.6rem;
   font-family: Georgia, serif;
-  background: 0 0 no-repeat linear-gradient(to bottom, hsl(70, 75%, 45%), hsl(70, 70%, 35%));
+  background: 0 0 no-repeat linear-gradient(to bottom, hsl(45, 75%, 45%), hsl(40, 65%, 35%));
 }
 
-.NotesList {
+.KanbanBoard {
   padding: 2rem;
 }
 
-.NotesList-header {
-  color: hsl(75, 45%, 45%);
+.KanbanBoard-header {
+  color: hsl(45, 45%, 30%);
   font: 700 6rem/1 Gerogia, serif;
   text-align: center;
-  text-shadow: 0 -1px 0 hsla(75, 30%, 30%, 1),
-  0 1px 0 hsla(75, 60%, 60%, 1);
+  text-shadow: 0 -1px 0 hsla(45, 30%, 15%, 1),
+  0 1px 0 hsla(45, 60%, 60%, 1);
 }
 
-.NotesList-button {
+.KanbanBoard-addButton,
+.LanesList-addButton {
   height: 2em;
   width: 2em;
   line-height: 0;
@@ -33,70 +34,127 @@ body {
   border: none;
   border-radius: 3px;
   background-color: white;
-  color: hsla(70, 45%, 45%, 1);
+  color: hsla(45, 45%, 45%, 1);
   cursor: default;
 }
+.LanesList-addButton {
+  margin: 0 0 0.5em 0.5em;
+}
 
-.NotesList-list {
-  margin: 1rem 0;
-  padding: 0;
+.LanesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0.5rem -1rem;
+
+  & .LanesList-lane {
+    flex: 1 1 auto;
+    margin: 1rem;
+    min-width: 20em;
+    background-color: #efefef;
+    box-shadow: 0 0 3px hsla(45, 45%, 15%, 0.45);
+    border-radius: 0.6rem;
+  }
+
+  & .LanesList-laneHeader {
+    overflow: auto;
+
+    padding: 0.5em;
+
+    color: #efefef;
+    background-color: hsl(45, 45%, 30%);
+
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+}
+
+.NotesList {
+  margin: 0;
+  padding: 0.5em;
   list-style: none;
 
   & .NotesList-listItem {
     display: block;
-    position: relative;
+    outline: none;
+    border-left: 1em solid White;
+    border-radius: 3px 0 0 3px;
+    cursor: move;
 
-    & > span,
-    & > input {
-      display: block;
-      margin: 0.2rem;
-      padding: 0.3rem;
-      width: 100%;
-      font-family: Georgia, serif;
-      font-size: 1.6rem;
-      color: hsl(60, 45%, 15%);
-      border: 1px solid transparent;
-      border-left: 3px solid White;
-      border-bottom: 1px dotted White;
-      border-radius: 0.3rem;
+    &.is-dragging {
+      visibility: hidden;
+    }
+  }
+}
+
+.LanesList-editable,
+.NotesList-editable {
+  position: relative;
+
+  & > span,
+  & > input {
+    display: block;
+    margin: 0.2em 0;
+    padding: 0.2em 0.5em;
+    width: 100%;
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    color: hsl(45, 45%, 15%);
+    border: 1px solid transparent;
+    border-bottom: 1px dotted White;
+    border-radius: 0 3px 3px 0;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    cursor: text;
+
+    &:hover {
+      border-color: White;
+      background-color: hsla(0, 0%, 100%, 0.45);
+
+      & + button {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    &:focus {
+      border-style: solid;
+      background-color: hsla(0, 0%, 100%, 0.75);
+    }
+  }
+  & > button {
+    position: absolute;
+    top: calc(50% - 0.5em);
+    right: 0.5em;
+    width: 1em;
+    height: 1em;
+    margin: -1px -1px 0 0;
+    border-radius: 1em;
+    background-color: transparent;
+    color: hsl(45, 45%, 30%);
+    transition: all 0.3s ease-in-out;
+    border: none;
+    line-height: 0;
+    padding: 0;
+
+    &:hover,
+    &:focus {
+      background-color: White;
+      color: hsl(45, 45%, 45%);
       outline: none;
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        cursor: text;
-        border-color: White;
-        background-color: hsla(0, 0%, 100%, 0.45);
-
-        & + .NotesList-button {
-          visibility: visible;
-          opacity: 1;
-        }
-      }
-
-      &:focus {
-        border-style: solid;
-        background-color: hsla(0, 0%, 100%, 0.75);
-      }
     }
+  }
+}
 
-    & > .NotesList-button {
-      position: absolute;
-      top: calc(50% - 0.5em);
-      right: 0.5em;
-      width: 1em;
-      height: 1em;
-      margin: -1px -1px 0 0;
-      border-radius: 1em;
-      background-color: transparent;
-      color: hsla(70, 45%, 30%, 1);
-      transition: all 0.3s ease-in-out;
-
-      &:hover,
-      &:focus {
-        background-color: White;
-        color: hsl(70, 45%, 45%);
-        outline: none;
-      }
-    }
+.LanesList-editable {
+  & > span,
+  & > input {
+    border-radius: 3px;
+  }
+  & > span {
+    color: hsl(45, 30%, 90%);
+  }
+  & > button {
+    color: hsl(45, 45%, 60%);
   }
 }

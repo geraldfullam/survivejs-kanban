@@ -1,5 +1,4 @@
 import './normalize.css';
-import './main.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,5 +11,3 @@ import persist from './libs/persist';
 persist(alt, storage, 'app');
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-console.log(App.props);
