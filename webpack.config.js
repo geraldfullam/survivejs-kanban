@@ -33,7 +33,7 @@ const common = {
   },
   output : {
     path      : PATHS.public,
-    publicPath: '/',
+    publicPath: '/survivejs-kanban/',
     filename  : '[name].js'
   },
   module : {
@@ -147,7 +147,7 @@ if (TARGET === 'build' || TARGET === 'stats') {
         {
           test   : /\.css$/,
           loader : ExtractTextPlugin.extract('style', 'css!postcss'),
-          include: PATHS.app
+          include: PATHS.src
         }
       ]
     },
